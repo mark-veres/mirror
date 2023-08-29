@@ -73,7 +73,7 @@ func TestGetField(t *testing.T) {
 		t.Fail()
 	}
 
-	if value != "bob" {
+	if value.String() != "bob" {
 		t.Fail()
 	}
 }

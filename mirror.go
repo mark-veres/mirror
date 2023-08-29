@@ -61,16 +61,16 @@ func SetField(input any, key string, value any) error {
 	return nil
 }
 
-func GetField(input any, key string) (string, error) {
+func GetField(input any, key string) (reflect.Value, error) {
 	value := reflect.ValueOf(input)
 	if value.Kind() != reflect.Pointer || value.Elem().Kind() != reflect.Struct {
-		return "", errors.New("input must be pointer to struct")
+		return value, errors.New("input must be pointer to struct")
 	}
 
 	field := value.Elem().FieldByName(key)
 	if !field.IsValid() {
-		return "", fmt.Errorf("not a field name: %s", key)
+		return field, fmt.Errorf("not a field name: %s", key)
 	}
 
-	return fmt.Sprintf("%s", field), nil
+	return field, nil
 }

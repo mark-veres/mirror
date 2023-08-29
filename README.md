@@ -10,7 +10,10 @@ go get github.com/mark-veres/mirror
 ```go
 package main
 
-import "github.com/mark-veres/mirror"
+import (
+    "fmt"
+    "github.com/mark-veres/mirror"
+)
 
 type User struct {
 	Name string
@@ -39,7 +42,8 @@ func main() {
     // field to "mark". returns an error
     err := mirror.SetField(&s, "Name", "mark")
 
-    // value is now equal to "mark"
-    value, err = mirror.GetField(&s, "Name")
+    // returns a reflect.Value object and an error
+    value, err := mirror.GetField(&s, "Name")
+    fmt.Println(value.String())
 }
 ```
